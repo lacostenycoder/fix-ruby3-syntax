@@ -31,9 +31,9 @@ end
 def valid_hash?(string)
   begin
     #=> "{:key_1=>true,\"key_2\":false}"
-    string!.gsub(/(\w+):\s*([^},])/, '"\1":\2')
+    string.gsub!(/(\w+):\s*([^},])/, '"\1":\2')
     #=> "{\"key_1\":true,\"key_2\":false}"
-    string!.gsub(/:(\w+)\s*=>/, '"\1":')
+    string.gsub!(/:(\w+)\s*=>/, '"\1":')
     #strip string interpolation
     # string.gsub!(/\#\{+(?<=\#\{)[^()]+(?=\}\")+\}/, '')
     my_hash = JSON.parse(string, {symbolize_names: true})
