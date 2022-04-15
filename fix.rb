@@ -5,7 +5,7 @@ require 'active_support/core_ext/string/filters'
 @check_files = []
 @fixed_files = []
 @unmatched_files = []
-@ruby_files = Dir.glob(['**.rb', '**.rake']) - ['fix.rb']
+@ruby_files = Dir.glob(['**/*.rb', '**/*.rake']) - ['fix.rb']
 
 @pattern = /\w+\:.*(\n+)?.*\)/
 
