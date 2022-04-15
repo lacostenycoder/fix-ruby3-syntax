@@ -1,11 +1,11 @@
 def junk({foo: nil, bar: nil})
 # broken
-    html = ApplicationController.render(
+    html = ApplicationController.render({
       partial: "user_messages/#{user_message.message.message_type}",
       locals:  { user_message: user_message },
       formats: [:html],
       foo: {foobar: 'foobar'}
-    )
+    })
 
 # fixed
     html = ApplicationController.render({
@@ -15,7 +15,7 @@ def junk({foo: nil, bar: nil})
     })
 end
 
-def foo(bar:, opts={})
+def foo({bar:, opts={}})
 end
 
 def math(x, y)

@@ -28,11 +28,19 @@ def update_to_explicit_hash(string)
   string
 end
 
+def word_quoted?(word)
+  word[0].match(/[\'\"]/) &&
+  word[-1].match(/[\'\"]/)
+end
+
 def eval_word(word)
-  # if word.include?('user_message')
-  #   binding.pry
-  # end
-  word rescue nil
+  if word.is_a?(String)
+    if word_quoted?(word) 
+      "#{word.to_s}"
+    end
+  else
+    eval(word) rescue nil
+  end
 end
 
 def valid_hash?(string)
@@ -44,11 +52,12 @@ def valid_hash?(string)
     #strip string interpolation
     string.gsub!(/\#\{+(?<=\#\{)[^()]+(?=\}\")+\}/, '')
     # replace undefined vars 
-    hash_string = string.split(/\s\:/).map{|w| eval_word(w)}.join
+    hash_string = string.split(/\b/).map{|w| eval_word(w)}.join
     my_hash = JSON.parse(hash_string, {symbolize_names: true})
     #=> {:key_1=>true, :key_2=>false}
     my_hash.is_a? Hash
   rescue JSON::ParserError
+    binding.pry
     hash_string.is_a? Hash
   end
   true
