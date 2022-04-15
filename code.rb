@@ -3,7 +3,8 @@ def junk({foo: nil, bar: nil})
     html = ApplicationController.render(
       partial: "user_messages/#{user_message.message.message_type}",
       locals:  { user_message: user_message },
-      formats: [:html]
+      formats: [:html],
+      foo: {foobar: 'foobar'}
     )
 
 # fixed
@@ -19,7 +20,7 @@ end
 
 def math(x, y)
   puts '10:00'
-  100 * 2 * 2 + ( x * y)
+  100 * 2 * 2 + (x * y)
 end
 
 def foobar
